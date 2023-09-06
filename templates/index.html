@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Print Demo</title>
+  </head>
+  <body>
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" placeholder="Ted" />
+    <button id="print_demo">Create Demo</button>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
+      integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      $("#print_demo").click(function () {
+        const nameForm = new FormData();
+        nameForm.append("name", $("#name").val());
+
+        axios.post("/api/print_pdf", nameForm).then(function (response) {
+          let printWindow = window.open();
+          printWindow.document.write(response.data);
+          printWindow.print();
+          printWindow.close();
+        });
+      });
+    </script>
+  </body>
+</html>
