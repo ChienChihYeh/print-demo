@@ -9,7 +9,7 @@ def index():
 @app.route('/api/print_pdf', methods=['POST'])
 def print_pdf():
     name = request.form['name']
-    return render_template('print_pdf.html', name=name) 
+    return render_template('print_form.html', name=name) 
     # return name
 
 if __name__ == '__main__':
